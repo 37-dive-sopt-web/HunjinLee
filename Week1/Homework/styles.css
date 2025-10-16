@@ -184,3 +184,38 @@ main {
   background-color: rgb(255, 182, 193);
   transform: translateY(-3px);
 }
+
+/* ========== 스킬과 섹션 ========== */
+.skills-section {
+  margin-bottom: 60px;
+}
+
+.skills-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #232323;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #ffe4cc;
+  color: #8b5a3c;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #ffd4a3;
+}
