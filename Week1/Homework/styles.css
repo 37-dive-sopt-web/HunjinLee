@@ -104,3 +104,83 @@ body {
     margin-top: 20px;
   }
 }
+
+/* ========== 히어로 세션 ========== */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px 20px;
+}
+
+/* 히어로 세션 */
+.hero-section {
+  background: lightblue;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 60px;
+}
+
+.hero-section-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  color: #000;
+}
+
+.hero-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.hero-image:hover {
+  transform: scale(1.05);
+}
+
+.hero-section-text {
+  flex: 1;
+}
+
+.hero-section-text h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.hero-section-text p {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  margin-bottom: 30px;
+}
+
+/* 버튼 그룹 */
+.btn-group {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 15px 40px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-hi:hover {
+  background-color: rgb(144, 238, 144);
+  transform: translateY(-3px);
+}
+
+.btn-bye {
+  background-color: rgba(255, 182, 193, 0.9);
+  color: white;
+}
+
+.btn-bye:hover {
+  background-color: rgb(255, 182, 193);
+  transform: translateY(-3px);
+}
