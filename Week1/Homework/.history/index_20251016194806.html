@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hunjin's Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ========== 사이드 메뉴 ========== -->
+  <nav class="side-nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="#intro" class="nav-link">소개</a>
+      </li>
+      <li class="nav-item">
+        <a href="#skills" class="nav-link">나의 스킬</a>
+      </li>
+      <li class="nav-item">
+        <a href="#my" class="nav-link">나의 모습</a>
+      </li>
+      <li class="nav-item">
+        <a href="#gallery" class="nav-link">사진첩</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- ========== 헤더 ========== -->
+  <header class="header-container">
+    <div class="header-content">
+      <img src="images/hunjin.png" alt="훈진 프로필 사진" class="profile-image">
+      <div class="text-content">        
+        <h1 class="intro-name">이훈진</h1>
+        <p class="intro-text">👾 삐리삐릿, 웹계인들 어서오고 👽</p>
+      </div>
+      <div class="social-links">
+        <a 
+          href="https://github.com/huniversal" 
+          class="social-link"
+        >
+          <img src="/images/github.png" alt="GitHub 바로 가기">
+        </a>
+        <a 
+          href="https://www.linkedin.com/in/%ED%9B%88%EC%A7%84-%EC%9D%B4-ab715a353/" class="social-link"
+        >
+          <img src="/images/linkedin.png" alt="LinkedIn 바로 가기">
+        </a>
+        <a 
+          href="https://velog.io/@huniversal/posts" 
+          class="social-link"
+        >
+          <img src="/images/velog.png" alt="Velog 바로 가기">
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- ========== 히어로 세션 ========== -->
+  <main>
+    <section id="intro" class="hero-section">
+      <div class="hero-section-content">
+        <img src="images/hun.png" alt="훈진 프로필 사진" class="hero-image">
+        <div class="hero-section-text">
+          <h2>37기 웹 여러분 모두 만나서 반가워요</h2>
+          <p>함께 열심히 성장하고 좋은 추억 많이 쌓아봅시다!!</p>
+          <div class="btn-group">
+            <button class="btn btn-hi">하이</button>
+            <button class="btn btn-bye">바이</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========== 스킬 태그 ========== -->
+    <section id="skills" class="skills-section">
+      <h2>나의 스킬과 관심사</h2>
+      <div class="tags-container">
+        <span class="tag">React</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">CSS 싫어요ㅠ</span>
+        <span class="tag">오이 헤이러</span>
+        <span class="tag">카페인 중독</span>
+        <span class="tag">팟장님과 여행</span>
+        <span class="tag">삼겹살</span>
+        <span class="tag">시험🤮</span>
+        <span class="tag">집 갈래</span>
+        <span class="tag">인천 택시팟</span>
+        <span class="tag">건대 너무 멀어</span>
+        <span class="tag">강남팟 구해요</span>
+      </div>
+    </section>
+    <!-- ========== 나의 모습 ========== -->
+    <section id="my" class="my-section">
+      <h2>나의 모습</h2>
+        <div class="cards-container">
+          <!-- 카드 1 -->
+          <div class="card">
+            <img src="images/media.png" alt="미디어팀">
+            <div class="card-content">
+              <h3>미디어팀</h3>
+              <button class="like-btn">
+                <img src="images/heart.svg" alt="좋아요">
+              </button>
+            </div>
+            <p class="card-description">미팀❤️</p>
+          </div>
+          <!-- 카드 2 -->
+          <div class="card">
+            <img src="images/sky.png" alt="항공샷">
+            <div class="card-content">
+              <h3>나</h3>
+              <button class="like-btn">
+                <img src="images/heart.svg" alt="좋아요">
+              </button>
+            </div>
+            <p class="card-description">항공샷 장인</p>
+          </div>
+          <!-- 카드 3 -->
+          <div class="card">
+            <img src="images/camera.png" alt="카메라 촬영">
+            <div class="card-content">
+              <h3>취미</h3>
+              <button class="like-btn">
+                <img src="images/heart.svg" alt="좋아요">
+              </button>
+            </div>
+            <p class="card-description">같이 한강가서 사진 찍을 사람~</p>
+          </div>
+          <!-- 카드 4 -->
+          <div class="card">
+            <img src="images/eat.png" alt="음식 사진">
+            <div class="card-content">
+              <h3>먹잘알</h3>
+              <button class="like-btn">
+                <img src="images/heart.svg" alt="좋아요">
+              </button>
+            </div>
+            <p class="card-description">맛있는거 환장함</p>
+          </div>
+          <!-- 카드 5 -->
+          <div class="card">
+            <img src="images/pt.png" alt="발표">
+            <div class="card-content">
+              <h3>반전</h3>
+              <button class="like-btn">
+                <img src="images/heart.svg" alt="좋아요">
+              </button>
+            </div>
+            <p class="card-description">밖에서는 멀쩡한 척 하고 다님</p>
+          </div>
+        </div>
+    </section>
+    <!-- 사진첩 섹션 -->
+    <section id="gallery" class="gallery-section">
+      <h2>사진첩</h2>
+      <div class="snap-gallery">
+        <div class="gallery-item item-1">
+          <img src="images/goorm.png" alt="구름톤유니브">
+        </div>
+        <div class="gallery-item">
+          <img src="images/selfie.png" alt="거울샷">
+        </div>
+        <div class="gallery-item">
+          <img src="images/dog.png" alt="집옆편의점강아지">
+        </div>
+        <div class="gallery-item">
+          <img src="images/selfie2.png" alt="전시회">
+        </div>
+        <div class="gallery-item">
+          <img src="images/sopt.png" alt="솝트">
+        </div>
+        <div class="gallery-item">
+          <img src="images/hangang.png" alt="한강">
+        </div>
+      </div>
+    </section>
+    <section id="" class="">
+
+    </section>
+  </main>
+  <!-- ========== 푸터 ========== -->
+  <footer class="footer">
+    <p>읽어주셔서 감사합니다~</p>
+  </footer>
+</body>
+</html>
