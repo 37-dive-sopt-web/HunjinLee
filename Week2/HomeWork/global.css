@@ -1,12 +1,26 @@
 /* CSS 변수 및 전역 스타일 선언 */
 
+/* ========== 페이지 기본 설정 ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 0px;
+}
+
 :root {
   /* 색상 */
   --color-primary-500: #188CFF;
   --color-primary-400: #28A6FF;
   --color-primary-300: #50C4FF;
-  --color-background: #F7F9FF;
-  --color-text: #232323
+  --color-primary-200: #B9E7FF;
+  --color-white: #F7F9FF;
+  --color-black: #232323;
 
   /* 글꼴 및 크기 */
   --font-family-base: Arial, sans-serif;
