@@ -7,6 +7,11 @@
     box-sizing: border-box;
 }
 
+/* 전체 기본 배경색 */
+body {
+  background-color: var(--color-bg-white);
+}
+
 main {
   max-width: 1200px;
   margin: 0px auto;
@@ -19,16 +24,19 @@ main {
   --color-primary-400: #28A6FF;
   --color-primary-300: #50C4FF;
   --color-primary-200: #B9E7FF;
-  --color-white: #F7F9FF;
+  --color-bg-white: #F7F9FF;
   --color-black: #232323;
+  --color-white: #FFFFFF;
 
   /* 글꼴 및 크기 */
   --font-family-base: Arial, sans-serif;
   --font-size-base: 16px;
 
   /* 간격 및 여백 */
-  --spacing-small: 8px;
-  --spacing-medium: 16px;
+  --spacing-small: .5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+  --spaciing-xlarge: 3rem;
 
   /* 글꼴 및 크기 */
 
@@ -43,7 +51,7 @@ main {
     --font-size-h3: 1.5rem;
 
   /* Border Radius */
-  --border-radius-small: 4px;
-  --border-radius-medium: 8px;
+  --border-radius-small: .25rem;
+  --border-radius-medium: .5rem;
   --border-radius-circle: 50%;
 }
