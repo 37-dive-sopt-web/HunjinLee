@@ -118,3 +118,45 @@ select {
   transition: background-color 0.3s ease;
 }
 
+/* ========== 파트원 목록 섹션 ========== */
+.member-list-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: var(--spacing-large);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-medium);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-medium);
+}
+
+.list-select {
+  display: flex;
+  gap: var(--spacing-medium);
+}
+
+/* 테이블 스타일 */
+.member-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.member-table th,
+.member-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.member-table thead tr {
+  background-color: var(--color-primary-200);
+}
+
+.member-table tbody td a {
+    color: var(--color-primary-500); 
+    text-decoration: none;
+}
