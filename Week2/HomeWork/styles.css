@@ -117,6 +117,14 @@ select {
   background-color: var(--color-primary-500);
   transition: background-color 0.3s ease;
 }
+/* 검색 필터 세션 반응형 레이아웃 */
+@media (max-width: 480px){
+  .filter-row-triple,
+  .filter-row-double,
+  .filter-actions {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ========== 파트원 목록 섹션 ========== */
 .member-list-section {
@@ -159,4 +167,20 @@ select {
 .member-table tbody td a {
     color: var(--color-primary-500); 
     text-decoration: none;
+}
+
+/* 파트원 목록 세션 반응형 레이아웃 */
+@media (max-width: 768px) {
+  .member-list-section {
+    padding: 30px var(--spacing-small);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .member-table {
+    min-width: 700px;
+  }
 }
