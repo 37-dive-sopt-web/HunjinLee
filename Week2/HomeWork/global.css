@@ -54,4 +54,10 @@ main {
   --border-radius-small: .25rem;
   --border-radius-medium: .5rem;
   --border-radius-circle: 50%;
+
+  /* 반응형 브레이크 포인트 */
+  --break-point-xs: 0;
+  --break-point-sm: 480px;
+  --break-point-md: 768px;
+  --break-point-lg: 1024px;
 }
