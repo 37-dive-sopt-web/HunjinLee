@@ -17,5 +17,56 @@
       <p>37기 WEB 파트 이훈진</p>
     </div>
   </header>
+
+  <!-- ========== 검색 필터 세션 ========== -->
+  <section class="search-filter-section">
+    <h2>검색 필터</h2>
+    <form class="filter-form">
+      <!-- 이름 -->
+      <div class="filter-row filter-row-single">
+        <label for="name">이름</label>
+        <input type="text" id="name" placeholder="이름을 입력하세요">
+      </div>
+      <!-- 영문 이름 -->
+      <div class="filter-row filter-row-single">
+        <label for="en-name">영문 이름</label>
+        <input type="text" id="en-name" placeholder="영문 이름을 입력하세요">
+      </div>
+      <!-- 깃허브, 성별, 역할 -->
+      <div class="filter-row filter-row-triple">
+        <div class="filter-item">
+              <label for="github">깃허브</label>
+              <input type="text" id="github" placeholder="깃허브 아이디를 입력하세요">
+            </div>
+            <div class="filter-item">
+              <label for="gender">성별</label>
+              <select name="gender" id="gender">
+                <option value="all">전체</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label for="role">역할</label>
+              <select name="role" id="role">
+                <option value="all">전체</option>
+              </select>
+            </div>
+      </div>
+      <!-- 금잔디조, 나이 -->
+      <div class="filter-row filter-row-double">
+        <div class="filter-item">
+          <label for="">금잔디조</label>
+          <input type="text" id="score" placeholder="금잔디조를 입력하세요(1~9)">
+        </div>
+        <div class="filter-item">
+          <label for="">나이</label>
+          <input type="text" id="age" placeholder="나이를 입력하세요">
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button type="submit" class="btn">적용</button>
+        <button type="submit" class="btn">초기화</button>
+      </div>
+    </form>
+  </section>
 </body>
 </html>
