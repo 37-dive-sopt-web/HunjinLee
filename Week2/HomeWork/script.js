@@ -1,11 +1,13 @@
 // script.js
 document.addEventListener("DOMContentLoaded", () => {
   // tbody 요소 선택
-  const $memberTable = document.querySelector(".member-table tbody");
+  const memberTable = document.querySelector(".member-table tbody");
   // data.js localStorage 키 세팅
   const LOCAL_STORAGE_KEY = "membersData";
+  // 폼 요소 선택
+  const filterForm = document.querySelector(".filter-form");
 
-  // 1. localStorage에서 데이터를 불러오는 함수
+  // 1 데이터 가져오기 함수
   function getMembersData() {
     const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
     // 데이터 없으면 console.error 반환
@@ -13,22 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("ERROR: DATA 없음");
       return [];
     }
-
     return JSON.parse(storedData);
   }
 
-  // 2. 테이블 본문(<tbody>) 렌더링
+  // 2. 테이블 렌더링 함수 
   function renderTable(members) {
-    $memberTable.innerHTML = "";
-    const keys = [
-      "name",
-      "englishName",
-      "github",
-      "gender",
-      "role",
-      "codeReviewGroup", 
-      "age",
-    ];
+    memberTable.innerHTML = "";
+    const keys = ["name", "englishName", "github", "gender", "role", "codeReviewGroup", "age"];
 
     members.forEach((member) => {
       const row = document.createElement("tr");
@@ -53,10 +46,56 @@ document.addEventListener("DOMContentLoaded", () => {
         row.appendChild(cell);
       });
 
-      $memberTable.appendChild(row);
+      memberTable.appendChild(row);
     });
   }
 
+  // === 필터링 관련 함수 정의 ===
+  // 4. 필터 값 가져오기
+  function getFilterValues(form) {
+    const formData = new FormData(form);
+    const filters = {};
+
+    for (let [name, value] of formData.entries()) {
+      if (value && value !== "all") {
+        filters[name] = value.trim().toLowerCase();
+      }
+    }
+    return filters;
+  }
+
+  // 데이터 필터링 함수
+  function filterMembers(members, filters) {
+    let result = [...members]; // 복사본 생성
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (!value || value === "all") return;
+
+      const isPartialMatch = ["name", "englishName", "github"].includes(key);
+
+      result = result.filter((member) => {
+        const memberVal = String(member[key]).toLowerCase();
+        const filterVal = value.toLowerCase();
+        return isPartialMatch ? memberVal.includes(filterVal) : memberVal === filterVal;
+      });
+    });
+
+    return result;
+  }
+
+  // 폼 제출 처리
+  function handleSubmit(e) {
+    e.preventDefault(); // 페이지 새로 고침 방지
+    const filters = getFilterValues(filterForm);
+    const membersData = getMembersData();
+    const filtereMembers = filterMembers(membersData, filters);
+    renderTable(filtereMembers);
+  }
+
+  // === 초기 실행 및 이벤트 리스너 설정 ===
   const membersDataForRendering = getMembersData();
   renderTable(membersDataForRendering);
+
+  // 폼 제출 이벤트 리스너
+  filterForm.addEventListener("submit", handleSubmit);
 });

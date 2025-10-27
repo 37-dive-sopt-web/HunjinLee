@@ -27,31 +27,31 @@
       <!-- 이름 -->
       <div class="filter-row filter-row-single">
         <label for="name">이름</label>
-        <input type="text" id="name" placeholder="이름을 입력하세요">
+        <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
       </div>
 
       <!-- 영문 이름 -->
       <div class="filter-row filter-row-single">
         <label for="en-name">영문 이름</label>
-        <input type="text" id="en-name" placeholder="영문 이름을 입력하세요">
+        <input type="text" id="en-name" name="englishName" placeholder="영문 이름을 입력하세요">
       </div>
 
       <!-- 깃허브, 성별, 역할 -->
       <div class="filter-row filter-row-triple">
         <div class="filter-item">
               <label for="github">깃허브</label>
-              <input type="text" id="github" placeholder="깃허브 아이디를 입력하세요">
+              <input type="text" id="github" name="github" placeholder="깃허브 아이디를 입력하세요">
             </div>
             <div class="filter-item">
               <label for="gender">성별</label>
               <select name="gender" id="gender">
                 <option value="all">전체</option>
-                <option value="mail">남자</option>
-                <option value="femail">여자</option>
+                <option value="male">남자</option>
+                <option value="female">여자</option>
               </select>
             </div>
             <div class="filter-item">
-              <label for="role">역할</label>
+              <label for="role" name="role">역할</label>
               <select name="role" id="role">
                 <option value="all">전체</option>
                 <option value="YB">YB</option>
@@ -64,11 +64,11 @@
       <div class="filter-row filter-row-double">
         <div class="filter-item">
           <label for="">금잔디조</label>
-          <input type="text" id="score" placeholder="금잔디조를 입력하세요(1~9)">
+          <input type="text" id="score" name="codeReviewGroup" placeholder="금잔디조를 입력하세요(1~9)">
         </div>
         <div class="filter-item">
           <label for="">나이</label>
-          <input type="text" id="age" placeholder="나이를 입력하세요">
+          <input type="text" id="age" name="age" placeholder="나이를 입력하세요">
         </div>
       </div>
 
