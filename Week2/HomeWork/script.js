@@ -83,6 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return result;
   }
 
+  // 버튼 초기화 함수
+  function resetFilters() {
+    filterForm.reset();
+    const membersData = getMembersData();
+    renderTable(membersData);
+  }
+
   // 폼 제출 처리
   function handleSubmit(e) {
     e.preventDefault(); // 페이지 새로 고침 방지
