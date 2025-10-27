@@ -20,7 +20,7 @@ body {
 main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0px 00px;
+  padding: 0px;
 }
 
 section {
@@ -269,7 +269,7 @@ section {
 
 /* ========== 히어로 세션 반응형 ========== */
 @media (max-width: 1080px) {
-  .hreo-image {
+  .hero-image {
     width: 230px;
     height: 230px;
   }
