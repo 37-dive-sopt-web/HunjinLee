@@ -105,4 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 폼 제출 이벤트 리스너
   filterForm.addEventListener("submit", handleSubmit);
+
+  // 초기화 버튼 이벤트 리스너
+  filterForm.addEventListener("reset", () => {
+    setTimeout(() => {
+      const membersData = getMembersData();
+      renderTable(membersData);
+    }, 0)
+  })
 });
