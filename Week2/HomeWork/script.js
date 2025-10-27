@@ -1,11 +1,10 @@
 // script.js
 document.addEventListener("DOMContentLoaded", () => {
-  // tbody 요소 선택
-  const memberTable = document.querySelector(".member-table tbody");
-  // data.js localStorage 키 세팅
-  const LOCAL_STORAGE_KEY = "membersData";
-  // 폼 요소 선택
-  const filterForm = document.querySelector(".filter-form");
+  const memberTable = document.querySelector(".member-table tbody"); // tbody 요소 선택
+  const LOCAL_STORAGE_KEY = "membersData"; // data.js localStorage 키 세팅
+  const filterForm = document.querySelector(".filter-form"); // 폼 요소 선택
+  const deleteButton = document.querySelector(".delete-btn"); // 삭제 버튼
+  const selectAllCheckbox = document.querySelector("#select-all"); // 전체 선택 체크박스
 
   // 1 데이터 가져오기 함수
   function getMembersData() {
@@ -18,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return JSON.parse(storedData);
   }
 
-  // 2. 테이블 렌더링 함수 
+  // 2. 테이블 렌더링 함수
   function renderTable(members) {
-    memberTable.innerHTML = "";
+    memberTable.innerHTML = ""; // 기존 명단 초기화
     const keys = ["name", "englishName", "github", "gender", "role", "codeReviewGroup", "age"];
 
     members.forEach((member) => {
@@ -28,7 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 체크박스
       const checkboxCell = document.createElement("td");
-      checkboxCell.innerHTML = `<input type="checkbox">`;
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.dataset.memberId = member.id;
+      checkboxCell.appendChild(checkbox);
       row.appendChild(checkboxCell);
 
       // 컬럼 데이터 렌더링
@@ -51,36 +53,46 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // === 필터링 관련 함수 정의 ===
-  // 4. 필터 값 가져오기
+  /*
+   * 3. 필터값 가져오기 함수
+   * form : 필터 폼 요소
+   * return : {필터이름: 필터값, ...} 형태의 객체 반환
+   *
+   */
   function getFilterValues(form) {
-    const formData = new FormData(form);
+    const formData = new FormData(form); // 폼 데이터 내용 가져오기
     const filters = {};
 
     for (let [name, value] of formData.entries()) {
+      // value가 비어있지 않고, "all"이 아닐 때
       if (value && value !== "all") {
+        // 공백 제거, 소문자 변환 후 저장
         filters[name] = value.trim().toLowerCase();
       }
     }
     return filters;
   }
 
-  // 데이터 필터링 함수
+  /*
+   * 4. 데이터 필터링 함수
+   * @param {Array<Object>} members - 현재 명단
+   * @param {Object} filters - 사용자가 입력한 모든 검색 조건
+   * @returns {Array<Object>} - 모든 조건에 통과한 사람들로 이루어진 새로운 명단
+   */
+
+  // 명단과 검색 조건을 받아서 함수 시작
   function filterMembers(members, filters) {
-    let result = [...members]; // 복사본 생성
-
-    Object.entries(filters).forEach(([key, value]) => {
-      if (!value || value === "all") return;
-
-      const isPartialMatch = ["name", "englishName", "github"].includes(key);
-
-      result = result.filter((member) => {
-        const memberVal = String(member[key]).toLowerCase();
-        const filterVal = value.toLowerCase();
-        return isPartialMatch ? memberVal.includes(filterVal) : memberVal === filterVal;
+    if (Object.keys(filters).length === 0) {
+      return members;
+    }
+    return members.filter((member) => {
+      return Object.entries(filters).every(([key, filterValue]) => {
+        // entry 메소드 : 객체의 키-값 쌍을 배열로 반환
+        // every 메소드 : 모든 조건이 참이어야 true 반환
+        const memberValue = String(member[key]).toLowerCase();
+        return memberValue === filterValue;
       });
     });
-
-    return result;
   }
 
   // 버튼 초기화 함수
@@ -88,6 +100,33 @@ document.addEventListener("DOMContentLoaded", () => {
     filterForm.reset();
     const membersData = getMembersData();
     renderTable(membersData);
+  }
+
+  // === 삭제 관련 함수 정의 ===
+
+  // 선택된 멤버 ID 가져오기
+  function getSelectedMemberIds() {
+    const checkboxes = memberTable.querySelectorAll("input[type='checkbox']:checked");
+    return Array.from(checkboxes).map((checkbox) => parseInt(checkbox.dataset.memberId));
+  }
+
+  // 선택 멤버 삭제
+  function deleteSelectedMembers() {
+    const selectedsIds = getSelectedMemberIds();
+
+    let memberData = getMembersData();
+    memberData = memberData.filter((member) => !selectedsIds.includes(member.id));
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(memberData));
+    renderTable(memberData);
+  }
+
+  // 전체 선택 / 해제 기능
+  function toggleSelectAll() {
+    const checkboxes = memberTable.querySelectorAll("input[type='checkbox']");
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = selectAllCheckbox.checked;
+    });
   }
 
   // 폼 제출 처리
@@ -111,6 +150,12 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       const membersData = getMembersData();
       renderTable(membersData);
-    }, 0)
-  })
+    }, 0);
+  });
+
+  // 삭제 버튼 이벤트 리스너
+  deleteButton.addEventListener("click", deleteSelectedMembers);
+
+  // 전체 선택 체크박스
+  selectAllCheckbox.addEventListener("change", toggleSelectAll);
 });
