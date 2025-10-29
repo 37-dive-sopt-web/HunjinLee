@@ -86,7 +86,7 @@
         <h2>37기 웹 파트 목록</h2>
         <div class="list-actions">
           <button class="btn delete-btn">선택 삭제</button>
-          <button class="btn plus-btn">추가</button>
+          <button class="btn add-btn">추가</button>
         </div>
       </div>
       <div class="table-wrapper">
@@ -118,5 +118,65 @@
         </table>
       </div>
     </section>
+
+    <!-- ============== 모달창 ============== -->
+    <!-- required를 통해 유효성 검사 추가 -->
+    <dialog id="add-member-modal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>멤버 추가</h3>
+          <button class="close-modal-btn">X</button>
+        </div>
+        <form id="add-member-form">
+            <div class="filter-row filter-row-single">
+                <label for="modal-name">이름</label>
+                <input type="text" id="modal-name" name="name" placeholder="이름을 입력하세요" required>
+            </div>
+            <div class="filter-row filter-row-single">
+                <label for="modal-en-name">영문 이름</label>
+                <input type="text" id="modal-en-name" name="englishName" placeholder="영문 이름을 입력하세요" required>
+            </div>
+            
+            <div class="filter-row filter-row-single">
+                <label for="modal-github">깃허브</label>
+                <input type="text" id="modal-github" name="github" placeholder="깃허브 아이디를 입력하세요" required>
+            </div>
+  
+            <div class="filter-row filter-row-double">
+                <div class="filter-item">
+                    <label for="modal-gender">성별</label>
+                    <select id="modal-gender" name="gender" required>
+                        <option value="">선택</option>
+                        <option value="male">남자</option>
+                        <option value="female">여자</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="modal-role">역할</label>
+                    <select id="modal-role" name="role" required>
+                        <option value="">선택</option>
+                        <option value="YB">YB</option>
+                        <option value="OB">OB</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-row filter-row-double">
+                <div class="filter-item">
+                    <label for="modal-score">금잔디조</label>
+                    <input type="text" id="score" name="codeReviewGroup" placeholder="금잔디조를 입력하세요(1~9)" required>
+                </div>
+                <div class="filter-item">
+                    <label for="modal-age">나이</label>
+                    <input type="text" id="age" name="age" placeholder="나이를 입력하세요" required>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-add-submit">추가</button>
+            </div>
+        </form>
+      </div>
+    </dialog>
 </body>
 </html>
