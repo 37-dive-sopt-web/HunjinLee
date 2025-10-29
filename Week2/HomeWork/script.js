@@ -135,13 +135,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  function openModal() {
-    addModalOverlay.classList.add("active");
-  }
+function openModal() {
+  addModalOverlay.showModal();
+}
 
-  function closeModal() {
-    addModalOverlay.classList.remove("active");
-  }
+function closeModal() {
+  addModalOverlay.close();
+  addForm.reset();
+}
 
   // 삭제 버튼 이벤트 리스너
   deleteButton.addEventListener("click", deleteSelectedMembers);
