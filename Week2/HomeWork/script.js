@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const deleteButton = document.querySelector(".delete-btn"); // 삭제 버튼
   const selectAllCheckbox = document.querySelector("#select-all"); // 전체 선택 체크박스
 
+  const addModalOverlay = document.querySelector("#add-member-modal"); // 모달 배경 전체
+  const addMemberBtn = document.querySelector(".add-btn"); // 목록 섹션의 '추가' 버튼
+  const closeModalBtn = document.querySelector(".close-modal-btn"); // 모달 닫기 버튼
+  const addForm = document.getElementById('add-member-form')  // 모달 폼 요소
+
   // 1 데이터 가져오기 함수
   function getMembersData() {
     const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -129,6 +134,76 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+  function openModal() {
+    addModalOverlay.classList.add("active");
+  }
+
+  function closeModal() {
+    addModalOverlay.classList.remove("active");
+  }
+
+  // 삭제 버튼 이벤트 리스너
+  deleteButton.addEventListener("click", deleteSelectedMembers);
+
+  // 전체 선택 체크박스
+  selectAllCheckbox.addEventListener("change", toggleSelectAll);
+
+  // 추가 버튼 클릭 시 모달 열기
+  addMemberBtn.addEventListener("click", openModal);
+
+  // 닫기 버튼 클릭 시 모달 닫기
+  closeModalBtn.addEventListener("click", closeModal);
+
+  // 모달 오버레이 배경 클릭 시 모달 닫기
+  addModalOverlay.addEventListener("click", (e) => {
+    // 이벤트 타겟이 오버레이 자체일 때만 닫기 
+    if (e.target === addModalOverlay) {
+      closeModal();
+    }
+  });
+
+  function generateNewId(members) {
+    if (members.length === 0) return 1;
+    return Math.max(...members.map((m) => m.id)) + 1;
+  }
+
+  // === 모달 폼 제출 핸들러 ===
+  function handleAddMemberSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(addForm);
+    const newMember = {};
+    let isFormValid = true;
+
+    for (let [name, value] of formData.entries()) {
+      if (!value || value.trim() === "" || value === "선택") {
+        isFormValid = false;
+        break;
+      }
+      newMember[name] = value.trim();
+    }
+    if (!isFormValid) {
+      alert("모든 항목을 입력해야 합니다.");
+      return;
+    }
+
+    const currentMembers = getMembersData();
+    newMember.id = generateNewId(currentMembers);
+
+    newMember.codeReviewGroup = parseInt(newMember.codeReviewGroup);
+    newMember.age = parseInt(newMember.age);
+
+    currentMembers.push(newMember);
+
+    // 로컬 스토리지 업데이트
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(currentMembers));
+
+    alert(`${newMember.name}님의 데이터가 추가되었습니다.`);
+    renderTable(currentMembers);
+    closeModal();
+  }
+
   // 폼 제출 처리
   function handleSubmit(e) {
     e.preventDefault(); // 페이지 새로 고침 방지
@@ -144,6 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 폼 제출 이벤트 리스너
   filterForm.addEventListener("submit", handleSubmit);
+  addForm.addEventListener('submit', handleAddMemberSubmit);
 
   // 초기화 버튼 이벤트 리스너
   filterForm.addEventListener("reset", () => {
@@ -153,9 +229,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 0);
   });
 
-  // 삭제 버튼 이벤트 리스너
-  deleteButton.addEventListener("click", deleteSelectedMembers);
-
-  // 전체 선택 체크박스
-  selectAllCheckbox.addEventListener("change", toggleSelectAll);
 });
