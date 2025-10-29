@@ -3,12 +3,10 @@
     border: none;
     background-color: transparent; 
     padding: 0; 
-    position: fixed; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
-    
-    width: 90%;
+    width: auto;
     max-width: 600px;
 }
 
@@ -32,9 +30,6 @@
   background-color: var(--color-white);
   padding: var(--spacing-large);
   border-radius: var(--border-radius-medium);
-  width: 90%;
-  max-width: 600px;
-  gap: 1.25rem;
 }
 
 #add-member-form {

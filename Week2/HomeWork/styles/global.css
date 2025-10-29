@@ -1,8 +1,4 @@
 /* CSS 변수 및 전역 스타일 선언 */
-
-/* ========== 페이지 기본 설정 ========== */
-
-
 :root {
   /* 색상 */
   --color-primary-500: #188CFF;
@@ -21,7 +17,7 @@
   --spacing-small: .5rem;
   --spacing-medium: 1rem;
   --spacing-large: 2rem;
-  --spaciing-xlarge: 3rem;
+  --spacing-xlarge: 3rem;
 
   /* 글꼴 및 크기 */
 
