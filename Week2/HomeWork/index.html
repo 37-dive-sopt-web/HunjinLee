@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DIVE SOPT 37th WEB 파트원 관리 페이지</title>
+  <link rel="stylesheet" href="styles/reset.css">
   <link rel="stylesheet" href="styles/global.css">
   <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/search-filter.css">
   <link rel="stylesheet" href="styles/member-list.css">
   <link rel="stylesheet" href="styles/modal.css">
-  <link rel="stylesheet" href="styles/reset.css">
-  <link rel="stylesheet" href="styles/search-filter.css">
 
   <script type="module" src="data.js"></script>
   <script type="module" src="scripts/main.js"></script>
@@ -18,7 +18,6 @@
   <!-- ========== 헤더 ========== -->
   <header class="header">
     <div class="header-content">
-      <!-- <img src="" alt="헤더 프로필 이미지"> -->
       <p class="header-icon">🚀</p>
       <h1>SOPT 웹계인 관리 페이지</h1>
       <p>37기 WEB 파트 이훈진</p>
@@ -56,7 +55,7 @@
               </select>
             </div>
             <div class="filter-item">
-              <label for="role" name="role">역할</label>
+              <label for="role">역할</label>
               <select name="role" id="role">
                 <option value="all">전체</option>
                 <option value="YB">YB</option>
@@ -68,11 +67,11 @@
       <!-- 금잔디조, 나이 -->
       <div class="filter-row filter-row-double">
         <div class="filter-item">
-          <label for="">금잔디조</label>
+          <label for="codeReviewGroup">금잔디조</label>
           <input type="text" id="score" name="codeReviewGroup" placeholder="금잔디조를 입력하세요(1~9)">
         </div>
         <div class="filter-item">
-          <label for="">나이</label>
+          <label for="age">나이</label>
           <input type="text" id="age" name="age" placeholder="나이를 입력하세요">
         </div>
       </div>
@@ -109,16 +108,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- <>
-              <td><input type="checkbox"></td>
-              <td>이훈진</td>
-              <td>HunjinLee</td>
-              <td><a href="#">huniversal</a></td>
-              <td>남자</td>
-              <td>YB</td>
-              <td>4</td>
-              <td>25</td>
-            </tr> -->
           </tbody>
         </table>
       </div>
@@ -126,7 +115,7 @@
 
     <!-- ============== 모달창 ============== -->
     <!-- required를 통해 유효성 검사 추가 -->
-    <dialog id="add-member-modal" class="modal-overlay">
+    <dialog id="add-member-modal">
       <div class="modal-content">
         <div class="modal-header">
           <h3>멤버 추가</h3>
