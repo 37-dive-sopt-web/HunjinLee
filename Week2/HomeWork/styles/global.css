@@ -1,22 +1,7 @@
 /* CSS 변수 및 전역 스타일 선언 */
 
 /* ========== 페이지 기본 설정 ========== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-/* 전체 기본 배경색 */
-body {
-  background-color: var(--color-bg-white);
-}
-
-main {
-  max-width: 1200px;
-  margin: 0px auto;
-  padding: 0px;
-}
 
 :root {
   /* 색상 */

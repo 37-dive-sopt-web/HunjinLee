@@ -1,0 +1,110 @@
+/* ========== 검색 필터 영역 ========== */
+.search-filter-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: var(--spacing-large);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-medium);
+  /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  gap: 1.25rem
+}
+
+.filter-row {
+  display: flex;
+  gap: .625rem;
+}
+
+.filter-row-single {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.filter-row-single label {
+  /* TODO: 라벨의 너비를 고정하여 모든 라벨이 동일한 위치에서 끝나도록 조정 */
+  width: 70px;
+  flex-shrink: 0;
+}
+
+.filter-row-triple,
+.filter-row-double {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.filter-row-double {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .625rem;
+}
+
+.filter-item label {
+  width: 70px;
+  flex-shrink: 0;
+}
+
+/* 입력 / 선택 필드 스타일 */
+input[type="text"],
+select {
+  padding: 0.625rem;
+  border: 1px solid #afafaf;
+  border-radius: var(--border-radius-medium);
+  width: 100%;
+}
+
+/* 버튼 영역 스타일링 */
+.filter-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .625rem;
+  margin-top: 1.25rem;
+}
+
+.btn {
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius-medium);
+  cursor: pointer;
+  font-size: 16px;
+  background-color: var(--color-primary-400);
+  color: var(--color-white);
+}
+
+.btn:hover {
+  background-color: var(--color-primary-500);
+  transition: background-color 0.3s ease;
+}
+/* 검색 필터 세션 반응형 레이아웃 */
+@media (max-width: 480px){
+  .search-filter-section h2 {
+    font-size: 1.25rem;
+  }
+  label {
+    font-size: .875rem;
+  }
+  .filter-row-triple,
+  .filter-row-double,
+  .filter-actions {
+    grid-template-columns: 1fr;
+  }
+
+  input[type="text"],
+  select {
+    font-size: .875rem;
+  }
+
+  .btn {
+    font-size: .9375rem;
+  }
+}
