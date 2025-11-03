@@ -1,0 +1,28 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM 실습</title>
+  </head>
+  <body>
+    <button onClick="onClick()">리스트 추가하기</button>
+    <ul id="ul"></ul>
+  </body>
+
+  <script>
+		const onClick = () => {
+      const ul = document.getElementById('ul');
+      let listContent = '';
+			
+			// 1 ~ 3000
+      for(let i =1; i<=3000; i++) {
+        listContent += `<li>${i}</li>`
+      }
+      ul.innerHTML = listContent;
+    };
+
+  </script>
+</html>
