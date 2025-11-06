@@ -1,8 +1,7 @@
-import './App.css'
 
 function App() {
   return (
-    <h1>안녕</h1>
+    <div>기초 세팅</div>
   )
 }
 
