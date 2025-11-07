@@ -28,6 +28,7 @@ export default {
         h1: "2.5rem",
         h2: "2rem",
         h3: "1.5rem",
+        h4: "1.25rem",
       },
       // 4. 폰트 굵기 (Font Weight)
       fontWeight: {
