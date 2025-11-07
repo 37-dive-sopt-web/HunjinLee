@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { buildDeck } from "../../utils/deckUtils"
 import Board from "../Board/Board";
+import GameStatus from "../GameStatus/GameStatus";
 
 // 제한 시간 
 const TIME_LIMIT = 45.00;
@@ -112,10 +113,19 @@ const Game = () => {
     }
     // 승리 / 패배 판정 및 리셋
     const isGameLost = time <= 0 && !allMatched;
+    const isGameWon = allMatched;
 
-    if (allMatched || isGameLost) {
+    if (isGameWon || isGameLost) {
       if (timerRef.current) clearInterval(timerRef.current);
       setIsGameOver(true);
+
+      const elapsedTime = TIME_LIMIT - time; // 경과 시간 계산
+      const message = isGameWon
+        ? `승리! Level ${level}을 ${elapsedTime.toFixed(2)}초에 클리어했어요.`
+        : `😥 패배! 제한 시간 ${TIME_LIMIT}초 초과했어요.`;
+
+      alert(message); 
+      // TODO: 모달창 리팩토링: alert() 대신 GameOverModal 컴포넌트 렌더링 로직으로 교체 예정
 
       setTimeout(resetGame, 3000);
       // TODO : 승리 시 ranking 로직에 클리어 기록 저장 로직 추가 예정
@@ -140,7 +150,7 @@ const Game = () => {
       </div>
 
       {/* 2. 상태 패널 (임시) */}
-      <div className="w-full p-4 mt-6 bg-gray-100 rounded-lg shadow-inner md:w-64 md:ml-8 md:mt-0">
+      {/* <div className="w-full p-4 mt-6 bg-gray-100 rounded-lg shadow-inner md:w-64 md:ml-8 md:mt-0">
         <h3 className="mb-4 text-xl font-bold">게임 진행 상태 (임시)</h3>
         <p>시간: {time.toFixed(2)}s</p>
         <p>시도: {challenge}</p>
@@ -155,6 +165,18 @@ const Game = () => {
               ? "패배! (3초 후 리셋)"
               : "카드를 눌러 게임을 시작"}
         </p>
+      </div> */}
+      <div className="w-full mt-6 md:w-2/5 lg:w-2/4 md:ml-6 md:mt-0">
+        <GameStatus
+          time={time}
+          challenge={challenge}
+          matchedPairs={matchedPairs}
+          totalPairs={totalPairs}
+          level={level}
+          setLevel={setLevel}
+          isGameStarted={isGameStarted}
+          isGameOver={isGameOver}
+        />
       </div>
     </div>
   );
