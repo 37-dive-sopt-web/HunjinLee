@@ -5,10 +5,12 @@ export default {
     extend: {
       // 1. 색상
       colors: {
+        "primary-600": "#0A70EB",
         "primary-500": "#188CFF",
         "primary-400": "#28A6FF",
         "primary-300": "#50C4FF",
         "primary-200": "#B9E7FF",
+        "primary-100": "#D7F1FF",
         "bg-white": "#F7F9FF",
         black: "#232323",
         white: "#FFFFFF",
@@ -36,8 +38,8 @@ export default {
       // 5. Border Radius
       borderRadius: {
         small: "0.25rem", // --border-radius-small
-        medium: "0.5rem", 
-        circle: "50%",
+        medium: "0.5rem",
+        large: "1rem",
       },
     },
   },
