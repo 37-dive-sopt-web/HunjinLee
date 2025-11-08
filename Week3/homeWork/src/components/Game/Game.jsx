@@ -22,6 +22,7 @@ const Game = () => {
   // 게임 시작 상태 유효 -> true 변경 되어야 게임 시작
   const [isGameOver, setIsGameOver] = useState(false);
   // 게임 종료 상태 저장, 종료 후 true
+  const [infoMessage, setInfoMessage] = useState("카드를 눌러 게임을 시작");
 
   // 타이머 관리
   const timerRef = useRef(null);
@@ -46,6 +47,7 @@ const Game = () => {
       setIsGameLocked(false);
       setIsGameStarted(false);
       setIsGameOver(false);
+      setInfoMessage("카드를 눌러 게임을 시작");
     },
     [level]
   );
@@ -70,10 +72,19 @@ const Game = () => {
   //---------------------------------------------------------
   const handleCardClick = useCallback(
     (id) => {
+      // 1. 이미 클릭된 카드인지 확인 (flippedIds에 포함되어 있다면)
+      if (flippedIds.includes(id)) {
+        setInfoMessage("이미 뒤집은 카드입니다."); 
+        return;
+      }
       if (!isGameStarted) {
         startGame();
       }
       if (isGameLocked || flippedIds.length === 2) return;
+
+      if (flippedIds.length === 0) {
+        setInfoMessage("짝을 맞춰주세요."); 
+      }
 
       setCards((prevCards) => prevCards.map((card) => (card.id === id ? { ...card, isFlipped: true } : card)));
       setFlippedIds((pervIds) => [...pervIds, id]);
@@ -100,6 +111,7 @@ const Game = () => {
         );
         setFlippedIds([]);
         setIsGameLocked(false);
+        setInfoMessage("짝 맞추기 성공!");
       } else {
         // 실패
         timeoutRef.current = setTimeout(() => {
@@ -108,6 +120,7 @@ const Game = () => {
           );
           setFlippedIds([]);
           setIsGameLocked(false);
+          setInfoMessage("짝 맞추기 실패!");
         }, 700);
       }
     }
@@ -122,7 +135,7 @@ const Game = () => {
       const elapsedTime = TIME_LIMIT - time; // 경과 시간 계산
       const message = isGameWon
         ? `승리! Level ${level}을 ${elapsedTime.toFixed(2)}초에 클리어했어요.`
-        : `😥 패배! 제한 시간 ${TIME_LIMIT}초 초과했어요.`;
+        : `패배! 제한 시간 ${TIME_LIMIT}초 초과했어요.`;
 
       alert(message); 
       // TODO: 모달창 리팩토링: alert() 대신 GameOverModal 컴포넌트 렌더링 로직으로 교체 예정
@@ -176,6 +189,7 @@ const Game = () => {
           setLevel={setLevel}
           isGameStarted={isGameStarted}
           isGameOver={isGameOver}
+          infoMessage={infoMessage}
         />
       </div>
     </div>

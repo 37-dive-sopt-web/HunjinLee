@@ -7,7 +7,17 @@ const LEVEL_OPTIONS = [
   { value: 3, label: "Level 3" },
 ];
 
-const GameStatus = ({ time, challenge, matchedPairs, totalPairs, level, setLevel, isGameStarted, isGameOver }) => {
+const GameStatus = ({
+  time,
+  challenge,
+  matchedPairs,
+  totalPairs,
+  // level,
+  // setLevel,
+  isGameStarted,
+  isGameOver,
+  infoMessage,
+}) => {
   const getMessage = useCallback(() => {
     if (isGameOver) {
       if (matchedPairs === totalPairs) {
@@ -18,8 +28,8 @@ const GameStatus = ({ time, challenge, matchedPairs, totalPairs, level, setLevel
     if (!isGameStarted) {
       return "카드를 눌러 게임을 시작";
     }
-    return "짝을 맞춰주세요.";
-  }, [isGameOver, isGameStarted, matchedPairs, totalPairs]);
+    return infoMessage;
+  }, [isGameOver, isGameStarted, matchedPairs, totalPairs, infoMessage]);
 
   const handleLevelChange = () => {
     // const newLevel = parseInt(e.target.value, 10);
