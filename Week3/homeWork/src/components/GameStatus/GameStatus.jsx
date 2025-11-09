@@ -1,4 +1,3 @@
-// src/components/GameStatus/GameStatus.jsx
 import React, { useCallback } from "react";
 
 const LEVEL_OPTIONS = [
@@ -54,7 +53,7 @@ const GameStatus = ({
 
       {/* 2. 주요 상태 정보 Grid */}
       <div className="grid grid-cols-3 gap-3 mb-6 text-center">
-        <StatusBox title="남은 시간" value={time.toFixed(2)} unit="s" />
+        <StatusBox title="남은 시간" value={time.toFixed(1)} unit="s" />
         <StatusBox title="성공한 짝" value={`${matchedPairs}/${totalPairs}`} />
         <StatusBox title="시도" value={challenge} />
       </div>

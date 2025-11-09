@@ -3,7 +3,7 @@ import { buildDeck } from "../../utils/deckUtils"
 import Board from "../Board/Board";
 import GameStatus from "../GameStatus/GameStatus";
 
-// 제한 시간 
+// 제한 시간 상수 정의
 const TIME_LIMIT = 45.00;
 
 const Game = () => {
@@ -26,7 +26,9 @@ const Game = () => {
 
   // 타이머 관리
   const timerRef = useRef(null);
+  // useRef를 통해 setInterval이 반환하는 타이머 ID 저장
   const timeoutRef = useRef(null);
+  // 매치 실패 시 setTimeout이 반환
 
   const totalPairs = cards.length / 2; // 카드 짝의 개수 계산
   const matchedPairs = cards.filter((card) => card.isMatched).length / 2;
@@ -53,19 +55,25 @@ const Game = () => {
   );
 
   const startGame = useCallback(() => {
+    console.log("DEBUG: startGame 호출됨. isGameStarted:", isGameStarted);
     if (isGameStarted) return;
-    setIsGameStarted(true); // 게임 시작 상태 변경(true)
-    setIsGameOver(false);
+    if (timerRef.current) return;
+
     timerRef.current = setInterval(() => {
+      // 게임 카운트다운 로직
       setTime((prevTime) => {
-        const newTime = prevTime - 0.01;
+        const newTime = Math.round(prevTime * 10 - 1) / 10;
         if (newTime <= 0) {
           clearInterval(timerRef.current);
           return 0;
         }
-        return Math.max(0, parseFloat(newTime.toFixed(2)));
+        return newTime;
       });
-    }, 10);
+    }, 100);
+    setIsGameStarted(true); // 게임 시작 상태 변경(true)
+    setIsGameOver(false);
+    console.log("DEBUG: 타이머 ID 설정 완료:", timerRef.current);
+    console.log("DEBUG: 타이머 설정 완료 및 실행");
   }, [isGameStarted]);
 
   // ------------------- 카드 클릭 핸들러 -------------------
@@ -74,22 +82,28 @@ const Game = () => {
     (id) => {
       // 1. 이미 클릭된 카드인지 확인 (flippedIds에 포함되어 있다면)
       if (flippedIds.includes(id)) {
-        setInfoMessage("이미 뒤집은 카드입니다."); 
+        setInfoMessage("이미 뒤집은 카드입니다.");
         return;
       }
-      if (!isGameStarted) {
+      if (!timerRef.current) {
+        console.log("DEBUG: 첫 클릭 감지. startGame() 호출.");
         startGame();
       }
       if (isGameLocked || flippedIds.length === 2) return;
 
       if (flippedIds.length === 0) {
-        setInfoMessage("짝을 맞춰주세요."); 
+        setInfoMessage("짝을 맞춰주세요.");
       }
 
+      // 카드 상태 업데이트
+      /*
+       * map 메소드를 사용하여 클릭된 카드만 isFlipped: true로 변경하여 상태 불변성 유지\
+       * 배열에 현재 클릭한 카드 id 추가, 스프레드 연산자를 통해 새 배열 생성하고 업데이트 진행
+       */
       setCards((prevCards) => prevCards.map((card) => (card.id === id ? { ...card, isFlipped: true } : card)));
       setFlippedIds((pervIds) => [...pervIds, id]);
     },
-    [isGameStarted, isGameLocked, flippedIds, startGame]
+    [isGameLocked, flippedIds, startGame, isGameStarted]
   );
 
   // ------------------- 매치 판정 -------------------
@@ -102,6 +116,7 @@ const Game = () => {
       const card1 = cards.find((c) => c.id === id1);
       const card2 = cards.find((c) => c.id === id2);
 
+      // 시도 횟수 증가
       setChallenge((prevChallenge) => prevChallenge + 1);
 
       if (card1.value === card2.value) {
@@ -115,14 +130,14 @@ const Game = () => {
       } else {
         // 실패
         setInfoMessage("실패!");
-        
+
         timeoutRef.current = setTimeout(() => {
-          setCards((prevCards) => 
-            prevCards.map((card) => (card.id === id1 || card.id === id2 ? {...card, isFlipped: false}: card))
+          setCards((prevCards) =>
+            prevCards.map((card) => (card.id === id1 || card.id === id2 ? { ...card, isFlipped: false } : card))
           );
           setFlippedIds([]);
           setIsGameLocked(false);
-                  setInfoMessage("잠시만 기다려주세요");
+          // setInfoMessage("잠시만 기다려주세요");
         }, 700);
       }
     }
@@ -131,7 +146,7 @@ const Game = () => {
     const isGameWon = allMatched;
 
     if (isGameWon || isGameLost) {
-      if (timerRef.current) clearInterval(timerRef.current);
+      // if (timerRef.current) clearInterval(timerRef.current);
       setIsGameOver(true);
 
       const elapsedTime = TIME_LIMIT - time; // 경과 시간 계산
@@ -139,18 +154,45 @@ const Game = () => {
         ? `승리! Level ${level}을 ${elapsedTime.toFixed(2)}초에 클리어했어요.`
         : `패배! 제한 시간 ${TIME_LIMIT}초 초과했어요.`;
 
-      alert(message); 
+      alert(message);
       // TODO: 모달창 리팩토링: alert() 대신 GameOverModal 컴포넌트 렌더링 로직으로 교체 예정
 
       setTimeout(resetGame, 3000);
       // TODO : 승리 시 ranking 로직에 클리어 기록 저장 로직 추가 예정
     }
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (timerRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [flippedIds, cards, time, allMatched, resetGame]);
+  }, [flippedIds, cards]);
 
+  useEffect(() => {
+    console.log("TIME CHANGE DEBUG:", time);
+    // time 상태가 45.0에서 변화하고 있는지 확인합니다.
+  }, [time]);
+
+  // src/components/Game/Game.jsx (기존 useEffect 아래에 추가)
+
+  useEffect(() => {
+    // time 상태와 allMatched 상태 변화를 감지하여 게임 종료를 처리합니다.
+    const isGameLost = time <= 0 && !allMatched;
+    const isGameWon = allMatched;
+
+    if (isGameWon || isGameLost) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      setIsGameOver(true);
+
+      const elapsedTime = TIME_LIMIT - time;
+      const message = isGameWon
+        ? `승리! Level ${level}을 ${elapsedTime.toFixed(1)}초에 클리어했어요.`
+        : `패배! 제한 시간 ${TIME_LIMIT}초 초과했어요.`;
+
+      alert(message);
+      setTimeout(resetGame, 3000);
+    }
+
+    // 이 useEffect는 time, allMatched, resetGame에 의존합니다.
+    return () => {};
+  }, [time, allMatched, resetGame]);
 
   const currentLevel = 1;
   return (
