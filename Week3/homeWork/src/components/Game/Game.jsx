@@ -111,16 +111,18 @@ const Game = () => {
         );
         setFlippedIds([]);
         setIsGameLocked(false);
-        setInfoMessage("짝 맞추기 성공!");
+        setInfoMessage("성공!");
       } else {
         // 실패
+        setInfoMessage("실패!");
+        
         timeoutRef.current = setTimeout(() => {
           setCards((prevCards) => 
             prevCards.map((card) => (card.id === id1 || card.id === id2 ? {...card, isFlipped: false}: card))
           );
           setFlippedIds([]);
           setIsGameLocked(false);
-          setInfoMessage("짝 맞추기 실패!");
+                  setInfoMessage("잠시만 기다려주세요");
         }, 700);
       }
     }
@@ -161,24 +163,6 @@ const Game = () => {
           level={currentLevel} // 레벨 정보 전달
         />
       </div>
-
-      {/* 2. 상태 패널 (임시) */}
-      {/* <div className="w-full p-4 mt-6 bg-gray-100 rounded-lg shadow-inner md:w-64 md:ml-8 md:mt-0">
-        <h3 className="mb-4 text-xl font-bold">게임 진행 상태 (임시)</h3>
-        <p>시간: {time.toFixed(2)}s</p>
-        <p>시도: {challenge}</p>
-        <p>
-          맞춘 짝: {matchedPairs}/{totalPairs}
-        </p>
-        
-        <p className="mt-2 font-semibold">
-          {allMatched
-            ? "승리! (3초 후 리셋)"
-            : time <= 0 && !allMatched
-              ? "패배! (3초 후 리셋)"
-              : "카드를 눌러 게임을 시작"}
-        </p>
-      </div> */}
       <div className="w-full mt-6 md:w-2/5 lg:w-2/4 md:ml-6 md:mt-0">
         <GameStatus
           time={time}
