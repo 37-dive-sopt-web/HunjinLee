@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "./components/Header/Header.jsx";
 import Container from "./components/Container/Container.jsx";
 import Game from "./components/Game/Game.jsx";
+import Ranking from "./components/Ranking/Ranking.jsx";
 
 const App = () => {
   const [activeTab, setActiveTab] = useState("Game");
@@ -17,7 +18,7 @@ const App = () => {
     if (activeTab === "Ranking") {
       return (
         <div className="p-6 border rounded-large bg-primary-100 min-h-[700px] w-full">
-          <h2 className="text-xl font-semibold">랭킹 탭</h2>
+          <Ranking />
         </div>
       );
     }

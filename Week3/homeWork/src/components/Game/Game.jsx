@@ -2,9 +2,10 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { buildDeck } from "../../utils/deckUtils"
 import Board from "../Board/Board";
 import GameStatus from "../GameStatus/GameStatus";
+import { saveRanking } from "../../utils/rankingUtils"; 
 
 // 제한 시간 상수 정의
-const TIME_LIMIT = 3.00;
+const TIME_LIMIT = 50.00;
 
 const Game = () => {
   // ------------------- 게임 상태 관리 -------------------
@@ -185,6 +186,13 @@ const Game = () => {
       setIsGameOver(true);
 
       const elapsedTime = TIME_LIMIT - time;
+      if (isGameWon) {
+        saveRanking({
+          clearTime: Math.round(elapsedTime * 10) / 10,
+          level: level,
+        });
+      }
+
       const message = isGameWon
         ? `승리! Level ${level}을 ${elapsedTime.toFixed(1)}초에 클리어했어요.`
         : `패배! 제한 시간 ${TIME_LIMIT}초 초과했어요.`;
@@ -195,7 +203,7 @@ const Game = () => {
 
     // 이 useEffect는 time, allMatched, resetGame에 의존
     return () => {};
-  }, [time, allMatched, resetGame, isGameStarted]);
+  }, [time, allMatched, resetGame, isGameStarted, level]);
 
   const currentLevel = 1;
   return (
