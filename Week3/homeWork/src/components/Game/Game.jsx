@@ -24,6 +24,7 @@ const Game = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   // 게임 종료 상태 저장, 종료 후 true
   const [infoMessage, setInfoMessage] = useState("카드를 눌러 게임을 시작");
+  // 게임 기록 배열
   const [history, setHistory] = useState([]);
 
   // 타이머 관리
@@ -55,7 +56,6 @@ const Game = () => {
       setIsGameStarted(false);
       setIsGameOver(false);
       setHistory([]);
-
       setInfoMessage("카드를 눌러 게임을 시작");
     },
     [level]
@@ -125,6 +125,7 @@ const Game = () => {
 
       // 시도 횟수 증가
       setChallenge((prevChallenge) => prevChallenge + 1);
+      let resultMessage = "";
 
       if (card1.value === card2.value) {
         // 성공
@@ -134,6 +135,7 @@ const Game = () => {
         setFlippedIds([]);
         setIsGameLocked(false);
         setInfoMessage("성공!");
+        resultMessage = `(${card1.value}, ${card2.value}) : 성공`;
       } else {
         // 실패
         setInfoMessage("실패!");
@@ -146,7 +148,15 @@ const Game = () => {
           setIsGameLocked(false);
           // setInfoMessage("잠시만 기다려주세요");
         }, 700);
+        resultMessage = `(${card1.value}, ${card2.value}) : 실패`;
       }
+      setHistory((prevHistory) => [
+        {
+          move: challenge + 1, // 현재 시도 횟수
+          message: resultMessage,
+        },
+        ...prevHistory,
+      ]);
     }
     // 승리 / 패배 판정 및 리셋
     const isGameLost = time <= 0 && !allMatched;
@@ -229,6 +239,7 @@ const Game = () => {
           isGameStarted={isGameStarted}
           isGameOver={isGameOver}
           infoMessage={infoMessage}
+          history = {history}
         />
       </div>
     </div>

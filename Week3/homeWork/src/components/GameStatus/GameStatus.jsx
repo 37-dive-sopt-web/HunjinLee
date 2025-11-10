@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import GameHistory from "../GameHistory/GameHistory";
 
 const LEVEL_OPTIONS = [
   { value: 1, label: "Level 1" },
@@ -16,6 +17,7 @@ const GameStatus = ({
   isGameStarted,
   isGameOver,
   infoMessage,
+  history, 
 }) => {
   const getMessage = useCallback(() => {
     if (isGameOver) {
@@ -68,9 +70,10 @@ const GameStatus = ({
       {/* 4. 최근 히스토리 (임시) */}
       <div className="mb-4">
         <p className="mb-2 text-white text-h4 text-bold">최근 히스토리</p>
-        <div className="p-3 bg-primary-300 min-h-[100px]">
+        {/* <div className="p-3 bg-primary-300 min-h-[100px]">
           <p className="flex items-center justify-center text-sm text-white">아직 뒤집은 카드가 없어요</p>
-        </div>
+        </div> */}
+        <GameHistory history={history} />
       </div>
     </div>
   );
