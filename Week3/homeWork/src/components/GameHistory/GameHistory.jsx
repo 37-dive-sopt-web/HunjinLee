@@ -1,14 +1,14 @@
 const GameHistory = ({history}) => {
   return (
-    <div className="w-full p-0 m-0">
+    <div className="w-full p-0 m-0 max-h-[12rem] overflow-y-auto pr-1">
       {history.length === 0 ? (
         <p className="flex items-center justify-center h-full p-3 text-sm text-white">아직 뒤집은 카드가 없어요</p>
       ) : (
-        <ul className="p-0 m-0 space-y-1 text-sm list-none">
-          {history.map((item, index) => { 
-            const [cardValues, result] = item.message.split(' : ');
-            
-            return ( 
+        <ul className="p-0 m-0 space-y-1 text-sm list-none ">
+          {history.map((item, index) => {
+            const [cardValues, result] = item.message.split(" : ");
+
+            return (
               <li
                 key={index}
                 className={`
@@ -25,8 +25,8 @@ const GameHistory = ({history}) => {
                 {/* 2. 결과 (성공/실패) */}
                 <span className={result.includes("성공") ? "text-green-700" : "text-red-500"}>{result}</span>
               </li>
-            ); 
-          })} 
+            );
+          })}
         </ul>
       )}
     </div>
