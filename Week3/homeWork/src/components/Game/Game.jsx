@@ -4,7 +4,7 @@ import Board from "../Board/Board";
 import GameStatus from "../GameStatus/GameStatus";
 
 // 제한 시간 상수 정의
-const TIME_LIMIT = 45.00;
+const TIME_LIMIT = 3.00;
 
 const Game = () => {
   // ------------------- 게임 상태 관리 -------------------
@@ -39,7 +39,10 @@ const Game = () => {
   //---------------------------------------------------------
   const resetGame = useCallback(
     (currentlevel = level) => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       setCards(buildDeck(currentlevel));
@@ -49,6 +52,7 @@ const Game = () => {
       setIsGameLocked(false);
       setIsGameStarted(false);
       setIsGameOver(false);
+
       setInfoMessage("카드를 눌러 게임을 시작");
     },
     [level]
@@ -74,7 +78,7 @@ const Game = () => {
     setIsGameOver(false);
     console.log("DEBUG: 타이머 ID 설정 완료:", timerRef.current);
     console.log("DEBUG: 타이머 설정 완료 및 실행");
-  }, [isGameStarted]);
+  }, []);
 
   // ------------------- 카드 클릭 핸들러 -------------------
   //---------------------------------------------------------
@@ -103,7 +107,7 @@ const Game = () => {
       setCards((prevCards) => prevCards.map((card) => (card.id === id ? { ...card, isFlipped: true } : card)));
       setFlippedIds((pervIds) => [...pervIds, id]);
     },
-    [isGameLocked, flippedIds, startGame, isGameStarted]
+    [isGameLocked, flippedIds, startGame]
   );
 
   // ------------------- 매치 판정 -------------------
@@ -170,7 +174,6 @@ const Game = () => {
     // time 상태가 45.0에서 변화하고 있는지 확인합니다.
   }, [time]);
 
-  // src/components/Game/Game.jsx (기존 useEffect 아래에 추가)
 
   useEffect(() => {
     // time 상태와 allMatched 상태 변화를 감지하여 게임 종료를 처리합니다.
@@ -190,9 +193,9 @@ const Game = () => {
       setTimeout(resetGame, 3000);
     }
 
-    // 이 useEffect는 time, allMatched, resetGame에 의존합니다.
+    // 이 useEffect는 time, allMatched, resetGame에 의존
     return () => {};
-  }, [time, allMatched, resetGame]);
+  }, [time, allMatched, resetGame, isGameStarted]);
 
   const currentLevel = 1;
   return (
