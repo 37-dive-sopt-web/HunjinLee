@@ -24,6 +24,7 @@ const Game = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   // 게임 종료 상태 저장, 종료 후 true
   const [infoMessage, setInfoMessage] = useState("카드를 눌러 게임을 시작");
+  const [history, setHistory] = useState([]);
 
   // 타이머 관리
   const timerRef = useRef(null);
@@ -53,6 +54,7 @@ const Game = () => {
       setIsGameLocked(false);
       setIsGameStarted(false);
       setIsGameOver(false);
+      setHistory([]);
 
       setInfoMessage("카드를 눌러 게임을 시작");
     },
