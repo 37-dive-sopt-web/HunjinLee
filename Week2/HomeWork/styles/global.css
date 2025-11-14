@@ -1,0 +1,44 @@
+/* CSS 변수 및 전역 스타일 선언 */
+:root {
+  /* 색상 */
+  --color-primary-500: #188CFF;
+  --color-primary-400: #28A6FF;
+  --color-primary-300: #50C4FF;
+  --color-primary-200: #B9E7FF;
+  --color-bg-white: #F7F9FF;
+  --color-black: #232323;
+  --color-white: #FFFFFF;
+
+  /* 글꼴 및 크기 */
+  --font-family-base: Arial, sans-serif;
+  --font-size-base: 16px;
+
+  /* 간격 및 여백 */
+  --spacing-small: .5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+  --spacing-xlarge: 3rem;
+
+  /* 글꼴 및 크기 */
+
+    /* 폰트 굵기 */
+    --font-weight-regular: 400; 
+    --font-weight-medium: 500;  
+    --font-weight-bold: 700;   
+    
+    /* 제목 글꼴 */
+    --font-size-h1: 2.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.5rem;
+
+  /* Border Radius */
+  --border-radius-small: .25rem;
+  --border-radius-medium: .5rem;
+  --border-radius-circle: 50%;
+
+  /* 반응형 브레이크 포인트 */
+  --break-point-xs: 0;
+  --break-point-sm: 480px;
+  --break-point-md: 768px;
+  --break-point-lg: 1024px;
+}

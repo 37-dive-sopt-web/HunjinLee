@@ -1,0 +1,45 @@
+/* ========== 모달 ========== */
+#add-member-modal {
+    border: none;
+    background-color: transparent; 
+    padding: 0; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: auto;
+    max-width: 600px;
+}
+
+#add-member-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+/* ========== 모달 내용 컨테이너 ========== */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-medium);
+}
+
+.modal-header h3 {
+  font-size: var(--font-size-h3);
+}
+
+.modal-content {
+  background-color: var(--color-white);
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius-medium);
+}
+
+#add-member-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; 
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-large);
+}

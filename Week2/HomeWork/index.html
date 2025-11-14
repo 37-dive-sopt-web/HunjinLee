@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIVE SOPT 37th WEB 파트원 관리 페이지</title>
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/search-filter.css">
+  <link rel="stylesheet" href="styles/member-list.css">
+  <link rel="stylesheet" href="styles/modal.css">
+
+  <script type="module" src="data.js"></script>
+  <script type="module" src="scripts/main.js"></script>
+</head>
+<body>
+  <!-- ========== 헤더 ========== -->
+  <header class="header">
+    <div class="header-content">
+      <p class="header-icon">🚀</p>
+      <h1>SOPT 웹계인 관리 페이지</h1>
+      <p>37기 WEB 파트 이훈진</p>
+    </div>
+  </header>
+
+  <!-- ========== 검색 필터 세션 ========== -->
+  <section class="search-filter-section">
+    <h2>검색 필터</h2>
+    <form class="filter-form">
+      <!-- 이름 -->
+      <div class="filter-row filter-row-single">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+      </div>
+
+      <!-- 영문 이름 -->
+      <div class="filter-row filter-row-single">
+        <label for="en-name">영문 이름</label>
+        <input type="text" id="en-name" name="englishName" placeholder="영문 이름을 입력하세요">
+      </div>
+
+      <!-- 깃허브, 성별, 역할 -->
+      <div class="filter-row filter-row-triple">
+        <div class="filter-item">
+              <label for="github">깃허브</label>
+              <input type="text" id="github" name="github" placeholder="깃허브 아이디를 입력하세요">
+            </div>
+            <div class="filter-item">
+              <label for="gender">성별</label>
+              <select name="gender" id="gender">
+                <option value="all">전체</option>
+                <option value="male">남자</option>
+                <option value="female">여자</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label for="role">역할</label>
+              <select name="role" id="role">
+                <option value="all">전체</option>
+                <option value="YB">YB</option>
+                <option value="OB">OB</option>
+              </select>
+            </div>
+      </div>
+
+      <!-- 금잔디조, 나이 -->
+      <div class="filter-row filter-row-double">
+        <div class="filter-item">
+          <label for="codeReviewGroup">금잔디조</label>
+          <input type="text" id="score" name="codeReviewGroup" placeholder="금잔디조를 입력하세요(1~9)">
+        </div>
+        <div class="filter-item">
+          <label for="age">나이</label>
+          <input type="text" id="age" name="age" placeholder="나이를 입력하세요">
+        </div>
+      </div>
+
+      <!-- 버튼 세션 -->
+      <div class="filter-actions">
+        <button type="submit" class="btn">적용</button>
+        <button type="reset" class="btn">초기화</button>
+      </div>
+    </form>
+  </section>
+  
+    <!-- ========== 검색 결과 세션 ========== -->
+    <section class="member-list-section">
+      <div class="list-header">
+        <h2>37기 웹 파트 목록</h2>
+        <div class="list-actions">
+          <button class="btn delete-btn">선택 삭제</button>
+          <button class="btn add-btn">추가</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table class="member-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="select-all"></th>
+              <th>이름</th>
+              <th>영문 이름</th>
+              <th>깃허브</th>
+              <th>성별</th>
+              <th>역할</th>
+              <th>금잔디조</th>
+              <th>나이</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============== 모달창 ============== -->
+    <!-- required를 통해 유효성 검사 추가 -->
+    <dialog id="add-member-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>멤버 추가</h3>
+          <button class="close-modal-btn">&#x2715;</button>
+        </div>
+        <form id="add-member-form">
+            <div class="filter-row filter-row-single">
+                <label for="modal-name">이름</label>
+                <input type="text" id="modal-name" name="name" placeholder="이름을 입력하세요" required>
+            </div>
+            <div class="filter-row filter-row-single">
+                <label for="modal-en-name">영문 이름</label>
+                <input type="text" id="modal-en-name" name="englishName" placeholder="영문 이름을 입력하세요" required>
+            </div>
+            
+            <div class="filter-row filter-row-single">
+                <label for="modal-github">깃허브</label>
+                <input type="text" id="modal-github" name="github" placeholder="깃허브 아이디를 입력하세요" required>
+            </div>
+  
+            <div class="filter-row filter-row-double">
+                <div class="filter-item">
+                    <label for="modal-gender">성별</label>
+                    <select id="modal-gender" name="gender" required>
+                        <option value="">선택</option>
+                        <option value="male">남자</option>
+                        <option value="female">여자</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="modal-role">역할</label>
+                    <select id="modal-role" name="role" required>
+                        <option value="">선택</option>
+                        <option value="YB">YB</option>
+                        <option value="OB">OB</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-row filter-row-double">
+                <div class="filter-item">
+                    <label for="modal-score">금잔디조</label>
+                    <input type="text" id="score" name="codeReviewGroup" placeholder="금잔디조를 입력하세요(1~9)" required>
+                </div>
+                <div class="filter-item">
+                    <label for="modal-age">나이</label>
+                    <input type="text" id="age" name="age" placeholder="나이를 입력하세요" required>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-add-submit">추가</button>
+            </div>
+        </form>
+      </div>
+    </dialog>
+</body>
+</html>

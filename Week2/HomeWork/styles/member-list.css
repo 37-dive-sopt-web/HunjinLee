@@ -1,0 +1,68 @@
+/* ========== 파트원 목록 섹션 ========== */
+.member-list-section {
+  max-width: 1200px;
+  margin: var(--spacing-large) auto;
+  padding: var(--spacing-large);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-medium);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-medium);
+}
+
+/* 테이블 스타일 */
+.member-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.member-table th,
+.member-table td {
+  padding: .625rem;
+  border-bottom: 1px solid #eee;
+}
+
+.member-table thead tr {
+  background-color: var(--color-primary-200);
+}
+
+.member-table tbody td a {
+    color: var(--color-primary-500); 
+    text-decoration: none;
+}
+
+/* 파트원 목록 세션 반응형 레이아웃 */
+@media (max-width: 768px) {
+  .member-list-section {
+    padding: 1.875rem var(--spacing-small);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .member-table {
+    min-width: 700px;
+  }
+
+  .member-table th, 
+  .member-table td {
+    font-size: 0.875rem; 
+    padding: 0.5rem 0.3125rem;
+  }
+
+  .member-list-section h2 {
+    font-size: var(--font-size-h3);
+  }
+
+  .member-list-section .btn {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+  }
+}

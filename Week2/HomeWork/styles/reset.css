@@ -1,0 +1,17 @@
+/* 브라우저 기본 CSS 세팅 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전체 기본 배경색 */
+body {
+  background-color: var(--color-bg-white);
+}
+
+main {
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 0px;
+}
