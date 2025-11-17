@@ -19,6 +19,18 @@ const SignupPage = () => {
   const handleBackLogin = () => {
     navigate("/login");
   };
+
+  // 회원가입
+  const handleSignup = () => {
+    console.log('회원가입 시도', {
+      username, 
+      password, 
+      name, 
+      email,
+      age,
+    })
+  }
+
   // 1단계 다음 버튼
   const handleStep1Next = () => {
     setStep(2);
@@ -47,7 +59,7 @@ const SignupPage = () => {
   };
   // 2단계 다음 버튼
   const handleStep2Next = () => {
-    setStep(2);
+    setStep(3);
   };
 
   // 2단계 폼 렌더링
@@ -84,7 +96,28 @@ const SignupPage = () => {
 
   // 3단계 폼 렌더링
   const renderStep3 = () => {
-    return <p>3단계 렌더링</p>;
+    const isDisabled = name.trim() === '' || email.trim() === '' || age.trim() === '';
+
+    return (
+      <div>
+        <div>
+          <label>이름</label>
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='이름을 입력해주세요' />
+        </div>
+        <div>
+          <label>이메일</label>
+          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='이메일을 입력해주세요' />
+        </div>
+        <div>
+          <label>나이</label>
+          <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder='나이를 입력해주세요' />
+        </div>
+
+        <button onClick={handleSignup} disabled={isDisabled}>
+          회원가입
+        </button>
+      </div>
+    )
   };
 
   return (
