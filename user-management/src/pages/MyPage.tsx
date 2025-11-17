@@ -1,4 +1,5 @@
 // 마이 페이지
+import { useState } from 'react'
 import Header from '../components/Header'
 
 const MyPage = () => {
