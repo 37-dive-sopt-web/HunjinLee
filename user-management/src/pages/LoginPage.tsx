@@ -1,5 +1,6 @@
 // 로그인 페이지
 import { useState } from 'react';
+import * as styles from './LoginPage.css'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -10,29 +11,35 @@ const LoginPage = () => {
     // TOOD : API 연결 예정
   }
   return (
-    <div>
-      <h1>로그인</h1>
-      <div>
-        <label>아이디</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="아이디를 입력해주세요"
-        />
-      </div>
-      <div>
-        <label>비밀번호</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="비밀번호를 입력해주세요"
-        />
-      </div>
-      <button onClick={handleLogin}>로그인</button>
-      <div>
-        <span>회원가입</span>
+    <div className={styles.contaier}>
+      <div className={styles.formWrapper}>
+        <h1 className={styles.title}>로그인</h1>
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>아이디</label>
+          <input
+            type="text"
+            className={styles.input}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="아이디를 입력해주세요"
+          />
+        </div>
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>비밀번호</label>
+          <input
+            type="password"
+            className={styles.input}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="비밀번호를 입력해주세요"
+          />
+        </div>
+        <button className={styles.button} onClick={handleLogin}>
+          로그인
+        </button>
+        <div>
+          <span>회원가입</span>
+        </div>
       </div>
     </div>
   );
