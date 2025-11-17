@@ -19,13 +19,58 @@ const SignupPage = () => {
   const handleBackLogin = () => {
     navigate('/login');
   }
+  // 1단계 다음 버튼
+  const handleStepNext = () => {
+    setStep(2);
+  }
+
+  // 1단계 폼 렌더링
+  const renderStep1 = () => {
+    const idDisabled = username.trim() === '';
+
+    return (
+      <div>
+        <div>
+          <label>아이디</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="아이디를 입력해주세요"
+          />
+        </div>
+        <button 
+          onClick={handleStepNext} disabled={idDisabled}>
+          다음
+        </button>
+      </div>
+    );
+  }
+
+  // 2단계 폼 렌더링
+  const renderStep2 = () => {
+    return(
+      <p>2단계 렌더링</p>
+    )
+  }
+
+  // 3단계 폼 렌더링
+  const renderStep3 = () => {
+    return (
+      <p>3단계 렌더링</p>
+    )
+  }
+
   return (
     <div>
       <h1>회원가입</h1>
       {/* TODO :  step에 따라 다른 폼 내용 보여줄 예정 */}
+      {step === 1 && renderStep1()}
+      {step === 2 && renderStep2()}
+      {step === 3 && renderStep3()}
       <button onClick={handleBackLogin}>로그인으로 돌아가기</button>
     </div>
-  )
+  );
 }
 
 export default SignupPage
