@@ -1,7 +1,7 @@
-function App() {
-  return (
-    <h1>초기 세팅</h1>
-  )
-}
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router';
 
+function App() {
+  return <RouterProvider router={router} />;
+}
 export default App
