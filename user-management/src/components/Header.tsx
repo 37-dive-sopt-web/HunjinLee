@@ -7,14 +7,6 @@ interface HeaderProps {
 const Header = ({ userName }: HeaderProps) => {
   const navigate = useNavigate();
 
-  const handleMyInfo = () => {
-    navigate('/mypage');
-  }
-
-  const handleMembers = () => {
-    navigate('/mypage/members');
-  }
-
   const handleLogout = () => {
     console.log('로그아웃');
     navigate('/login');
