@@ -61,3 +61,10 @@ export const button = style({
   color: theme.color.white,
   borderRadius: theme.borderRadius.medium,
 });
+
+export const signupPage = style({
+  textAlign: 'center',
+  fontSize: theme.fontSize.base,
+  color: theme.color.primary300,
+  cursor: 'pointer',
+})
