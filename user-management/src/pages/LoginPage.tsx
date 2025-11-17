@@ -1,14 +1,20 @@
 // 로그인 페이지
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as styles from './LoginPage.css'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     console.log('로그인 시도', {username, password});
     // TOOD : API 연결 예정
+  }
+
+  const handleSignupPage = () => {
+    navigate("/signup");
   }
   return (
     <div className={styles.contaier}>
@@ -38,7 +44,7 @@ const LoginPage = () => {
           로그인
         </button>
         <div>
-          <span>회원가입</span>
+          <span className={styles.signupPage} onClick={handleSignupPage}>회원가입</span>
         </div>
       </div>
     </div>
