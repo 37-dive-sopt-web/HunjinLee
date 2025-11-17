@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import * as styles from "./Header.css";
 
 interface HeaderProps {
   userName: string;
@@ -18,15 +19,24 @@ const Header = ({ userName }: HeaderProps) => {
   }
 
   return (
-    <header>
-      <div>
-        <span>안녕하세요, {userName}</span>
+    <header className={styles.header}>
+      <div className={styles.userInfo}>
+        <h2>마이페이지</h2>
+        <span>안녕하세요, {userName}님</span>
       </div>
-      <nav>
-        <NavLink to="/mypage">내 정보</NavLink>
-        <NavLink to="/mypage/members">회원 조회</NavLink>
-        <button onClick={handleLogout}>로그아웃</button>
-        <button onClick={handleDeleteAccount}>회원탈퇴</button>
+      <nav className={styles.nav}>
+        <NavLink to="/mypage" className={styles.navLink}>
+          내 정보
+        </NavLink>
+        <NavLink to="/mypage/members" className={styles.navLink}>
+          회원 조회
+        </NavLink>
+        <button onClick={handleLogout} className={styles.button}>
+          로그아웃
+        </button>
+        <button onClick={handleDeleteAccount} className={styles.button}>
+          회원탈퇴
+        </button>
       </nav>
     </header>
   );
