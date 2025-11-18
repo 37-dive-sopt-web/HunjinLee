@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { theme } from "../styles/theme.css";
 
-export const contaier = style({
+export const container = style({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
