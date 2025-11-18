@@ -1,6 +1,7 @@
 // 로그인 페이지
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../api/auth';
 import * as styles from './LoginPage.css'
 
 const LoginPage = () => {
@@ -8,16 +9,24 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    console.log('로그인 시도', {username, password});
-    // TOOD : API 연결 예정
+  const handleLogin = async () => {
+    try {
+      const response = await login({ username, password });
+      localStorage.setItem("userId", String(response.data.userId));
+
+      navigate("/mypage");
+
+    } catch (err) {
+      console.error("로그인 실패:", err);
+      alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
+    }
   }
 
   const handleSignupPage = () => {
     navigate("/signup");
   }
   return (
-    <div className={styles.contaier}>
+    <div className={styles.container}>
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>로그인</h1>
         <div className={styles.inputGroup}>
@@ -44,7 +53,9 @@ const LoginPage = () => {
           로그인
         </button>
         <div>
-          <span className={styles.signupPage} onClick={handleSignupPage}>회원가입</span>
+          <span className={styles.signupPage} onClick={handleSignupPage}>
+            회원가입
+          </span>
         </div>
       </div>
     </div>

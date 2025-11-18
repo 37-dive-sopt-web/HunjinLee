@@ -1,9 +1,9 @@
 // API 공통 응답 형식
-export interface ApiRespionse<T> {
+export interface ApiResponse<T = any> {
   success: boolean;
   code: string;
   message: string;
-  data?: T;
+  data: T;
 }
 
 // 회원 정보
@@ -27,7 +27,7 @@ export interface LoginData {
   message: string;
 }
 
-export type LoginResponse = ApiRespionse<LoginData>;
+export type LoginResponse = ApiResponse<LoginData>;
 
 // 회원 가입 요청
 export interface SignupRequest {
@@ -37,8 +37,10 @@ export interface SignupRequest {
   email: string;
   age: number;
 }
+// 회원가입 응답 타입
+export type SignupResponse = ApiResponse<null>;
 
-export type UserResponse = ApiRespionse<User>;
+export type UserResponse = ApiResponse<User>;
 
 // 회원 정보 수정 요청
 export interface UpdateRequest {
@@ -46,3 +48,6 @@ export interface UpdateRequest {
   email: string;
   age: number;
 }
+
+export type UpdateUserResponse = ApiResponse<null>;
+export type DeleteUserResponse = ApiResponse<null>;
