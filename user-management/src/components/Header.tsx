@@ -9,6 +9,7 @@ const Header = ({ userName }: HeaderProps) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.removeItem("userId");
     console.log('로그아웃');
     navigate('/login');
   }
