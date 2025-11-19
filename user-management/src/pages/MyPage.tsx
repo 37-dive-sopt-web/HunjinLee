@@ -1,19 +1,65 @@
 // 마이 페이지
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header'
+import { getUserById, updateUser } from "../api/user";
 import * as styles from './MyPage.css'
 
 const MyPage = () => {
-  // 더미 데이터 
-  const [username] = useState("eju3945");
-  const [name, setName] = useState("이훈진");
-  const [email, setEmail] = useState("test33@test.com");
-  const [age, setAge] = useState("25");
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState<number | null>(null);
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
 
-    const handleSave = () => {
-      console.log("정보 수정 시도", { name, email, age });
-      // TODO: API 연결 예정
-      alert("저장되었습니다!");
+  // 페이지 로드 시 유저 정보 가져오기
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const storeUserId = localStorage.getItem("userId");
+
+        if (!storeUserId) {
+          console.log("로그인하지 않은 유저");
+          navigate("/login");
+        }
+
+        const userIdNum = Number(storeUserId);
+        setUserId(userIdNum);
+
+        const response = await getUserById(userIdNum);
+
+        // 데이터 설정
+        const userData = response.data;
+        setUsername(userData.username);
+        setName(userData.name);
+        setEmail(userData.email);
+        setAge(String(userData.age));
+      } catch (err) {
+        console.error(err);
+        alert("사용자 정보를 불러오는데 실패했습니다.");
+        navigate("/login");
+      }
+    };
+    fetchUserData();
+  }, [navigate]);
+
+    const handleSave = async () => {
+      if (!userId) return;
+
+      try {
+        const response = await updateUser(userId, {
+          name,
+          email,
+          age: Number(age),
+        });
+
+        console.log("정보 수정 성공:", response);
+        alert("저장되었습니다!");
+      } catch (error) {
+        console.error("정보 수정 실패:", error);
+        alert("저장에 실패했습니다. 다시 시도해주세요.");
+      }
     };
   
   const isSaveDisabled = name.trim() === "" || email.trim() === "" || age.trim() === "";
