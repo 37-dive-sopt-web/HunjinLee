@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getUserById } from "../api/user";
 import Header from "../components/Header";
 import * as styles from "./MembersPage.css";
 
@@ -13,34 +14,29 @@ interface Member {
 const MembersPage = () => {
   const [memberId, setMemberId] = useState("");
   const [memberData, setMemberData] = useState<Member | null>(null);
+  const [currentUserName, setCurrentUserName] = useState("");
 
-  // 더미 데이터
-  const dummyMembers:{[key: number] : Member} = { 
-    24: {
-      id: 24,
-      username: "gnswls",
-      name: "훈진",
-      email: "202344016@itc.ac.kr",
-      age: 25,
-    },
-    25: {
-      id: 25,
-      username: "zus",
-      name: "주정현",
-      email: "zus0816@naver.com",
-      age: 25,
-    },
-  };
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const storeUserId = localStorage.getItem('userId');
 
-  const handleSearch = () => {
-    console.log("회원 조회:", memberId);
+        const response = await getUserById(Number(storeUserId));
+        setCurrentUserName(response.data.name);
+      } catch(err) {
+        console.error("사용자 정보 조회 실패", err);
+      }
+    }
+    fetchCurrentUser();
+  }, [])
 
-    // 더미 데이터에서 찾기
-    const found = dummyMembers[Number(memberId)];
+  const handleSearch = async () => {
+    try {
+      const response = await getUserById(Number(memberId));
 
-    if (found) {
-      setMemberData(found);
-    } else {
+      setMemberData(response.data);
+    } catch(err) {
+      console.error("회원 정보 조회 실패", err);
       alert("사용자를 찾을 수 없습니다.");
       setMemberData(null);
     }
