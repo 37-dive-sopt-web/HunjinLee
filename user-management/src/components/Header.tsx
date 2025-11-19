@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import DeleteAccountModal from './DeleteAccountModal';
+import { deleteUser } from "../api/user";
 import * as styles from "./Header.css";
 
 
@@ -26,17 +27,32 @@ const Header = ({ userName }: HeaderProps) => {
     setIsModalOpen(false);
   };
 
-  const handleDeleteConfirm = () => {
-    // TODO: API 연결 예정
-    console.log("회원탈퇴 진행");
+  const handleDeleteConfirm = async () => {
+    try {
+      const storeUserId = localStorage.getItem("userId");
 
-    // localStorage 삭제
-    localStorage.removeItem("userId");
+      if (!storeUserId) {
+        alert("로그인 정보가 없습니다.");
+        navigate("/login");
+        return;
+      }
 
-    alert("회원탈퇴가 완료되었습니다.");
+      // API 호출
+      const response = await deleteUser(Number(storeUserId));
 
-    // 로그인 페이지로 이동
-    navigate("/login");
+      console.log("회원탈퇴 성공:", response);
+
+      // localStorage 삭제
+      localStorage.removeItem("userId");
+
+      alert("회원탈퇴가 완료되었습니다.");
+
+      navigate("/login");
+    } catch (error) {
+      console.error("회원탈퇴 실패:", error);
+      alert("회원탈퇴에 실패했습니다. 다시 시도해주세요.");
+      setIsModalOpen(false);
+    }
   };
 
   return (
