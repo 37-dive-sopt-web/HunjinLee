@@ -1,6 +1,7 @@
 // 회원가입 페이지
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { signup } from "../api/auth";
 import * as styles from "./SignupPage.css"
 
 const SignupPage = () => {
@@ -22,15 +23,26 @@ const SignupPage = () => {
   };
 
   // 회원가입
-  const handleSignup = () => {
-    console.log('회원가입 시도', {
-      username, 
-      password, 
-      name, 
-      email,
-      age,
-    })
-  }
+  const handleSignup = async () => {
+    try {
+      // API 호출
+      const response = await signup({
+        username,
+        password,
+        name,
+        email,
+        age: Number(age), 
+      });
+
+      console.log("회원가입 성공:", response);
+
+      alert(`${name}님, 회원가입이 완료되었습니다!`);
+      navigate("/login");
+    } catch (err) {
+      console.error("회원가입 실패:", err);
+      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
   // 1단계 다음 버튼
   const handleStep1Next = () => {
